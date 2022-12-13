@@ -1,6 +1,6 @@
 # Bacalhau demo with OpenCV
 
-This is a tutorial on how to use Bacalhau with OpenCV. Read the full tutorial here:
+This is a tutorial on how to use Bacalhau with OpenCV. Read the full tutorial [here](https://mysterious-beaufort-cca.notion.site/Using-Bacalhau-with-OpenCV-2b3e473de89a41548a5fb77c4f2fd073).
 
 > clone/fork this repo:
 
@@ -62,3 +62,38 @@ export IMAGE=<your_dockerhub_username/your_image_name>
 sudo docker build -t ${IMAGE} .
 sudo docker image push ${IMAGE}
 ```
+
+## 3. Upload to IPFS
+
+Lots of great resources:
+
+- [web3storage](https://web3.storage/)
+- [nft.storage](https://nft.storage/docs/quickstart/)
+- [pinata](https://app.pinata.cloud/)
+- [IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/)
+
+## 4. Run Bacalhau
+
+- Install:
+
+  ```bash
+  curl -sL https://get.bacalhau.org/install.sh | bash
+
+  ```
+
+- Check if it is installed:
+
+  ```bash
+  bacalhau version
+  ```
+
+Run Bacalhau with the Docker image and CID that you created:
+
+```bash
+bacalhau docker run \
+-v <the_CID_of_the_folder_uploaded_to_IPFS>:/inputs \
+<name_of_your_image_on_docker_hub> \
+-- sh -c 'python3 color-seg.py ./inputs/dron2.jpg'
+```
+
+Look for an example in the [tutorial](https://mysterious-beaufort-cca.notion.site/Using-Bacalhau-with-OpenCV-2b3e473de89a41548a5fb77c4f2fd073).
